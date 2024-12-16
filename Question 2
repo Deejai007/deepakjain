@@ -1,0 +1,48 @@
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool isPrime(int num) {
+    if (num <= 1) return false;
+    for (int i = 2; i <= std::sqrt(num); ++i) {
+        if (num % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    sort(arr.begin(), arr.end(),greater<int>());
+    int largestPrimeIndex = -1, smallestPrimeIndex = -1;
+    for (int i = 0; i < n; ++i) {
+        if (isPrime(arr[i])) {
+          largestPrimeIndex=i;
+          break;
+        }
+    }
+       for (int i = n-1; i >=0; i--) {
+        if (isPrime(arr[i])) {
+          smallestPrimeIndex=i;
+          break;
+        }
+    }
+        swap(arr[largestPrimeIndex], arr[0]);
+        swap(arr[n-1], arr[smallestPrimeIndex]);
+
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+
+
